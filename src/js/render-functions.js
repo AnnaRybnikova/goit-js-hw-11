@@ -1,4 +1,13 @@
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
+
+import errorIconUrl from "../img/error.svg";
+
 const galleryEl = document.querySelector(".gallery");
+
+export const clearGallery = () => {
+    galleryEl.innerHTML = '';
+}
 
 export const renderImages = images => {
   const markup = images.hits
@@ -37,3 +46,20 @@ export const renderImages = images => {
     
     galleryEl.insertAdjacentHTML("beforeend", markup);
 }
+
+export const showLoader = () => {
+    galleryEl.insertAdjacentHTML("beforeBegin", `<span class="loader"></span>`);
+}
+
+export const removeLoader = () => {
+    const loaderEl = document.querySelector('.loader');
+    loaderEl.remove();
+}
+
+export const showErrorNotification = errorMessage => iziToast.error({
+    title: '',
+    message: errorMessage,
+    class: 'custom-noty error',
+    position: 'topRight',
+    iconUrl: errorIconUrl,
+});
